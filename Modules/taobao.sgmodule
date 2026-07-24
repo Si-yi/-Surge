@@ -1,5 +1,5 @@
-#!name=Taobao FlashGo No Splash
-#!desc=Remove common Taobao/Taobao FlashGo splash screen ads with conservative URL rewrites. If the app changes API names, capture the splash request URL and add it below.
+#!name=淘宝闪购去广告
+#!desc=去除淘宝闪购开屏广告
 #!author=Codex
 #!system=ios
 
