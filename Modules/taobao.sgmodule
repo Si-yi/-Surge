@@ -1,0 +1,17 @@
+#!name=Taobao FlashGo No Splash
+#!desc=Remove common Taobao/Taobao FlashGo splash screen ads with conservative URL rewrites. If the app changes API names, capture the splash request URL and add it below.
+#!author=Codex
+#!system=ios
+
+[URL Rewrite]
+# Taobao/Alibaba mtop splash/startup APIs.
+^https?:\/\/(?:acs|guide-acs|trade-acs)\.m\.taobao\.com\/gw\/mtop\.(?:taobao|alibaba|alimama)\.[^\/?]*(?:splash|startup|launch|open[_-]?screen|poplayer)[^\/?]*\/ - reject-dict
+
+# Same class of APIs when the mtop name is carried in the query string.
+^https?:\/\/(?:acs|guide-acs|trade-acs)\.m\.taobao\.com\/gw\/.*[?&]api=mtop\.(?:taobao|alibaba|alimama)\.[^&]*(?:splash|startup|launch|open[_-]?screen|poplayer) - reject-dict
+
+# Splash material images from Alibaba CDNs. Kept narrow by requiring splash/startup/launch/open-screen keywords.
+^https?:\/\/(?:gw|img|imgextra|heic)\.alicdn\.com\/.*(?:splash|startup|launch|open[_-]?screen|poplayer)[^?]*\.(?:jpg|jpeg|png|webp|gif)(?:\?.*)?$ - reject-img
+
+[MITM]
+hostname = %APPEND% acs.m.taobao.com, guide-acs.m.taobao.com, trade-acs.m.taobao.com, gw.alicdn.com, img.alicdn.com, imgextra.alicdn.com, heic.alicdn.com
